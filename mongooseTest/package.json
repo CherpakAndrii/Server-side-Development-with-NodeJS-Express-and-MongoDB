@@ -1,0 +1,14 @@
+{
+  "name": "mongoosetest",
+  "version": "1.0.0",
+  "description": "Mongoose testing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "wanna_be_a_hedgehog",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.1.7"
+  }
+}
