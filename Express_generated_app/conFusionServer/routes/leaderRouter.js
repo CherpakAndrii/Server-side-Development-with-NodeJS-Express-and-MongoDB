@@ -43,7 +43,7 @@ leaderRouter.route('/')
 
 leaderRouter.route('/:leaderId')
 .get((req,res,next) => {
-    Leaders.findById(req.params.promoId)
+    Leaders.findById(req.params.leaderId)
     .then((leader) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -53,10 +53,10 @@ leaderRouter.route('/:leaderId')
 })
 .post((req, res, next) => {
     res.statusCode = 403;
-    res.end('POST operation not supported on /dishes/'+ req.params.promoId);
+    res.end('POST operation not supported on /dishes/'+ req.params.leaderId);
 })
 .put((req, res, next) => {
-    Leaders.findByIdAndUpdate(req.params.promoId, {
+    Leaders.findByIdAndUpdate(req.params.leaderId, {
         $set: req.body
     }, { new: true })
     .then((leader) => {
@@ -67,7 +67,7 @@ leaderRouter.route('/:leaderId')
     .catch((err) => next(err));
 })
 .delete((req, res, next) => {
-    Leaders.findByIdAndRemove(req.params.promoId)
+    Leaders.findByIdAndRemove(req.params.leaderId)
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');

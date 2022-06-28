@@ -1,7 +1,29 @@
 <html>
   <title>This is index.html</title>
+  <script src=".\javascripts\front-back-interaction.js"></script>
+  <link rel="stylesheet" href="./stylesheets/style.css">
   <body>
     <h1>Index.html</h1>
-    <p>This is the contents of this file</p>
+    <p>Some operations:</p>
+    <div class="requests">
+      <div class="requestContainer">
+        <p>GET requests:</p>
+        <div class="button-container">
+          <a href="http://localhost:3000/"><button type="button" name="getOnRoot">Root</button></a>
+          <a href="http://localhost:3000/dishes"><button type="button" name="getOnDishes">Dishes</button></a>
+          <a href="http://localhost:3000/promotions"><button type="button" name="getOnPromotions">Promotions</button></a>
+          <a href="http://localhost:3000/leaders"><button type="button" name="getOnLeaders">Leaders</button></a>
+        </div>
+        <div class="button-container">
+          <a href="http://localhost:3000/dishes/62bb3698ef6da80edcd65d9a"><button type="button" name="getOnDishes1">dishes/1</button></a>
+          <a href="http://localhost:3000/promotions/62bb3698ef6da80edcd65d9c"><button type="button" name="getOnPromotions1">promotions/1</button></a>
+          <a href="http://localhost:3000/leaders/62bb3698ef6da80edcd65d9b"><button type="button" name="getOnLeaders1">leaders/1</button></a>
+        </div>
+        <div class="button-container">
+          <a href="http://localhost:3000/dishes/62bb3399c5fc4a3454af722f/comments"><button type="button" name="getOnDishes1/coments">dishes/1/coments</button></a>
+          <a href="http://localhost:3000/dishes/62bb3399c5fc4a3454af722f/comments/1"><button type="button" name="getOnPromotions1">promotions/1/coments/1</button></a>
+        </div>
+    </div>
+  </div>
   </body>
 </html>
