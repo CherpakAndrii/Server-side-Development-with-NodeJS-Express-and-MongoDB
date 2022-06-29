@@ -37,6 +37,8 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+var config = require('./config');
+
 function auth (req, res, next) {
     console.log(req.user);
 
@@ -69,7 +71,7 @@ mongoose.Promise = require('bluebird');
 
 const Dishes = require('./models/dishes');
 
-const url = 'mongodb://localhost:27017/conFusion';
+const url = config.mongoUrl;
 const connect = mongoose.connect(url, { useMongoClient: true });
 
 connect.then((db) => {
