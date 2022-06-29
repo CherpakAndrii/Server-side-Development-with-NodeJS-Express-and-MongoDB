@@ -7,6 +7,9 @@ var dishRouter = require('./routes/dishRouter');
 var promoRouter = require('./routes/promoRouter');
 var leaderRouter = require('./routes/leaderRouter');
 var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var passport = require('passport');
+var authenticate = require('./authenticate');
 var app = express();
 
 // view engine setup
@@ -16,7 +19,6 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(cookieParser('2410-0306-3723-6877'));
 
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
@@ -29,41 +31,22 @@ app.use(session({
   store: new FileStore()
 }));
 
-function auth (req, res, next) {
-    console.log(req.session);
+app.use(passport.initialize());
+app.use(passport.session());
 
-    if (!req.session.user) {
-        var authHeader = req.headers.authorization;
-        if (!authHeader) {
-            var err = new Error('You are not authenticated!');
-            res.setHeader('WWW-Authenticate', 'Basic');
-            err.status = 401;
-            next(err);
-            return;
-        }
-        var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-        var user = auth[0];
-        var pass = auth[1];
-        if (user == 'admin' && pass == 'password') {
-            req.session.user = 'admin';
-            next(); // authorized
-        } else {
-            var err = new Error('You are not authenticated!');
-            res.setHeader('WWW-Authenticate', 'Basic');
-            err.status = 401;
-            next(err);
-        }
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+function auth (req, res, next) {
+    console.log(req.user);
+
+    if (!req.user) {
+      var err = new Error('You are not authenticated!');
+      err.status = 403;
+      next(err);
     }
     else {
-        if (req.session.user === 'admin') {
-            console.log('req.session: ',req.session);
-            next();
-        }
-        else {
-            var err = new Error('You are not authenticated!');
-            err.status = 401;
-            next(err);
-        }
+          next();
     }
 }
 
@@ -105,3 +88,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+// cd Node\Server-side-Development-with-NodeJS-Express-and-MongoDB\Express_generated_app\conFusionServer
