@@ -66,7 +66,6 @@ app.use(auth);
 
 app.use(express.static(__dirname+'/public'));
 
-app.use('/', indexRouter);
 app.use('/dishes', dishRouter);
 app.use('/leaders', leaderRouter);
 app.use('/promotions', promoRouter);
